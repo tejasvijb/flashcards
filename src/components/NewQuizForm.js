@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
 // import selectors
-import { selectTopics, addQuizIdToTopic } from "../features/topics/topicsSlice";
+import { selectTopics } from "../features/topics/topicsSlice";
 import { addQuiz } from "../features/quizzes/quizzesSlice";
+import { addCard } from "../features/cards/cardsSlice";
 
 
 
@@ -24,6 +25,12 @@ export default function NewQuizForm() {
     }
 
     const cardIds = [];
+    cards.forEach((card) => {
+        const id = uuidv4();
+        cardIds.push(id);
+        dispatch(addCard({ id, ...card }))
+    })
+
 
     // create the new cards here and add each card's id to cardIds
     // create the new quiz here
